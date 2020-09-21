@@ -1,0 +1,46 @@
+<h1 class="title">Vehicle Information</h1>
+<div class="center">
+    <div class="container">
+        <div class="sidebar">
+            <h2>Vehicles</h2>
+            <div *ngFor="let vehicle of vehicles" class="items">
+                <a class="item" [routerLink]="['/', vehicle.id]" routerLinkActive="is-active">
+                    <p>{{ vehicle.name }}</p>
+                </a>
+            </div>
+            <button class="new-vehicle" (click)="toggle()" id="bt">{{ buttonName }}</button>
+        </div>
+        <div class="vehicle-data">
+            <table class="vehicle-table">
+                <tr class="header-row">
+                    <th class="">Latitude</th>
+                    <th class="">Longitude</th>
+                    <th class="">Speed</th>
+                </tr>
+                <div class="data-row">
+                    <tr class="vehicle-data-row" *ngFor="let vehicleDt of vehicleData | slice: -6">
+                        <td class="">{{ vehicleDt.latitude }}</td>
+                        <td class="">{{ vehicleDt.longitude }}</td>
+                        <td class="">{{ vehicleDt.speed }}</td>
+                    </tr>
+                </div>
+            </table>
+            <button class="get-data" (click)="receiveData()">Receive data</button>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="show">
+    <div class="centerAddBox">
+        <div class="box">
+            <h1 class="titleAddBox">
+                Add new vehicle
+            </h1>
+            <div class="input-group p-2">
+                <input #vehicleNameInput type="text" class="form-control" placeholder="Name">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="submit" (click)="addVehicle(vehicleNameInput.value)">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
